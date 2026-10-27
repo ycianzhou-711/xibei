@@ -121,6 +121,27 @@ button:disabled{opacity:.5;cursor:not-allowed}
 .pack ul{columns:2 200px;column-gap:24px;padding-left:1.1em;margin:10px 0 0}
 footer{padding-block:28px;color:var(--muted);font-size:.82rem}
 @media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+
+section[id],#tracker{scroll-margin-top:76px}
+.fold{margin:18px 0;padding:14px 0;border-block:1px solid var(--line)}
+summary{cursor:pointer;font-weight:700;padding:8px 0;min-height:44px}
+summary:focus-visible{outline:2px solid var(--jac);outline-offset:3px}
+.fold[open]>summary{margin-bottom:14px}
+.activity-card h3{font-size:1.15rem;margin:8px 0 12px}
+.activity-card .facts{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;margin:0 0 12px;font-size:.9rem}
+.facts dt{color:var(--muted)}.facts dd{margin:0;overflow-wrap:anywhere}
+.activity-actions,.backup-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.activity-actions a{display:inline-flex;align-items:center;min-height:44px;padding:8px 12px;border:1px solid var(--line);border-radius:10px;text-decoration:none;font-weight:700}
+.activity-actions a:first-child{background:var(--gum-soft);color:var(--gum)}
+.activity-card details p{font-size:.88rem;margin:8px 0}
+.activity-card .verified{margin-top:12px;font-size:.78rem;color:var(--muted)}
+.alternative-list{display:grid;gap:12px}.alternative-list article{padding-block:12px;border-top:1px solid var(--line)}
+.age{display:block;padding:12px 14px}.age[open]{background:var(--jac-soft);border-radius:12px}.age ul{margin:12px 0 4px}.age .band-label{font-size:1.3rem}.age .band-label small{display:inline;margin-left:10px}.current-age-note{font-size:.8rem}
+.recipe-steps summary{color:var(--gum);font-size:.88rem}.recipe-steps .trick{font-size:.85rem}
+.pack ul{list-style:none;padding:0}.pack li{break-inside:avoid}.pack label{display:flex;align-items:center;gap:8px;min-height:44px;cursor:pointer}.pack input{width:20px;height:20px;accent-color:var(--gum);flex:none}.pack input:checked+span{text-decoration:line-through;color:var(--muted)}
+.backup-actions button,button.primary{min-height:44px}.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:560px){header.hero{padding-top:24px}section.band{padding-block:28px}.card{padding:16px}nav.tabs a{padding:8px 10px;font-size:.82rem}.assume .chip{font-size:.75rem}.activity-actions a{flex:1;justify-content:center}}
+
 </style>
 <style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
 </head>
@@ -129,11 +150,11 @@ footer{padding-block:28px;color:var(--muted);font-size:.82rem}
 <header class="hero wrap">
   <p class="eyebrow">悉尼 · 遛娃 · 吃饭 · 小锦囊</p>
   <h1>小西贝遛娃助理</h1>
-  <p class="lede">每周更新一次周末去哪玩，再加上对付挑食的菜谱和小技巧，还有分年龄的出门注意事项。手机上收藏这页，出门前点开看一眼就行。</p>
+  <p class="lede">每周两条遛娃推荐，加上好做的儿童餐。</p>
   <div class="assume">
     <span class="chip">📍 悉尼 <b>西北区</b>（车程按 Castle Hill 出发估算）</span>
-    <span class="chip">👶 小西贝 <b>2 岁 9 个月</b>（2024 年 1 月生）</span>
-    <span class="chip num">更新于 2026-10-27（周二）</span>
+    <span class="chip">👶 小西贝 <b id="child-age">2 岁 9 个月</b>（2024 年 1 月生）</span>
+    <span class="chip num" id="weekend-updated">活动更新日期载入中</span>
   </div>
 </header>
 
@@ -150,78 +171,13 @@ footer{padding-block:28px;color:var(--muted);font-size:.82rem}
 <section class="band" id="weekend">
   <div class="wrap">
     <div class="sec-head">
-      <p class="eyebrow"><span class="mark" style="background:var(--jac)"></span>板块一 · 周末计划</p>
-      <h2>10月31日（六）– 11月1日（日）</h2>
-      <p>这个周六正好是万圣节，同时也是摘草莓的季节。下面这套路线按小西贝 2 岁 9 个月的节奏排：每天一个主活动，中午回家午睡，单程都在 45 分钟以内。好消息是他还不满 3 岁，两个果园都免费。</p>
+      <p class="eyebrow"><span class="mark" style="background:var(--jac)"></span>本周末 · 先看这两个</p>
+      <h2 id="weekend-title">本周末去哪玩</h2>
+      <p id="weekend-intro">正在读取本周活动…</p>
+      <p class="meta" id="weekend-status" role="status"></p>
     </div>
-
-    <div class="grid2">
-      <article class="card plan">
-        <h3>推荐路线 · 西北区出发</h3>
-        <p class="who">上午出门，中午回家睡，傍晚轻松玩一下</p>
-        <div class="slot"><div class="when">周六<br>上午</div><div class="what">
-          <b>Canoelands Orchard 摘草莓、蓝莓</b>
-          <p>从 Castle Hill 经 Galston 过去大约 40 分钟。果园主季 10 月中开始，周末<strong>必须预约</strong>，建议订 9 点左右的早场，太阳还不毒。</p>
-          <p class="meta"><span class="tag book">需预约</span><span class="num">成人 $8 起 · 3 岁以下免费</span> · 电话 <span class="num">0419 688 039</span> · <a class="go" href="http://www.canoelandsorchard.com/" target="_blank" rel="noopener">官网 / 预订 ↗</a></p>
-          <p class="where"><a href="https://www.google.com/maps/dir/?api=1&origin=Castle+Hill+NSW&destination=Canoelands+Orchard%2C+27+Canoelands+Rd%2C+Canoelands+NSW&travelmode=driving" target="_blank" rel="noopener">📍 地图路线</a></p>
-        </div></div>
-        <div class="slot"><div class="when">周六<br>傍晚</div><div class="what">
-          <b>Hudson Hotel 万圣节儿童迪斯科</b>
-          <p>6–9pm，Seven Hills，离家大约 15 分钟。有变装比赛，6 点到、7 点撤，不耽误睡觉。给他穿个南瓜或小动物的衣服就行。</p>
-          <p class="meta"><span class="tag free">免费</span>建议先 RSVP · <a class="go" href="https://www.hudsonhotel.com.au/events/" target="_blank" rel="noopener">官网 / RSVP ↗</a></p>
-          <p class="where"><a href="https://www.google.com/maps/dir/?api=1&origin=Castle+Hill+NSW&destination=Hudson+Hotel%2C+Seven+Hills+NSW&travelmode=driving" target="_blank" rel="noopener">📍 地图路线</a></p>
-        </div></div>
-        <div class="slot"><div class="when">周日<br>上午</div><div class="what">
-          <b>Bungarribee Park「Bush Monsters: Friend or Foe?」</b>
-          <p>9am–12pm，专门给小一点孩子的怪兽寻宝路线，有 Sydney Zoo 带来的小动物。从西北区过去大约 20 分钟，旁边就是 Sydney Zoo。</p>
-          <p class="meta"><span class="tag kid">低龄友好</span><span class="num">每个孩子 $15 起</span> · Arndell Park · <a class="go" href="https://www.greatersydneyparklands.nsw.gov.au/whats-on/bush-monsters-friend-or-foe" target="_blank" rel="noopener">官网 / 预订 ↗</a></p>
-          <p class="where"><span class="star">★ 4.5 <small>（3,081 条）</small></span> <a href="https://www.google.com/maps/search/?api=1&query=Bungarribee+Park%2C+Doonside+NSW" target="_blank" rel="noopener">Google 评价</a> · <a href="https://www.google.com/maps/dir/?api=1&origin=Castle+Hill+NSW&destination=Bungarribee+Park%2C+Doonside+NSW&travelmode=driving" target="_blank" rel="noopener">📍 地图路线</a></p>
-        </div></div>
-      </article>
-
-      <article class="card plan">
-        <h3>备选 · 想走远一点</h3>
-        <p class="who">精力好、不怕坐车的时候换着用</p>
-        <div class="slot"><div class="when">周六<br>全天</div><div class="what">
-          <b>Bilpin Fruit Bowl 温室摘草莓</b>
-          <p>经 Bells Line of Road 大约 1 小时，温室里摘，太阳大也不怕。每两小时限 200 人，<strong>一定要先订</strong>。车上正好睡一觉。</p>
-          <p class="meta"><span class="tag book">需预约</span><span class="num">成人 $20 · 3 岁以下免费 · 草莓 $20/kg</span> · <a class="go" href="https://bilpinfruitbowl.com.au/pick-your-own/" target="_blank" rel="noopener">官网 / 预订 ↗</a></p>
-          <p class="where"><span class="star">★ 3.6</span> <a href="https://www.google.com/maps/search/?api=1&query=Bilpin+Fruit+Bowl%2C+2093+Bells+Line+of+Rd%2C+Bilpin+NSW" target="_blank" rel="noopener">Google 评价</a> · <a href="https://www.google.com/maps/dir/?api=1&origin=Castle+Hill+NSW&destination=Bilpin+Fruit+Bowl%2C+2093+Bells+Line+of+Rd%2C+Bilpin+NSW&travelmode=driving" target="_blank" rel="noopener">📍 地图路线</a></p>
-        </div></div>
-        <div class="slot"><div class="when">六或日</div><div class="what">
-          <b>Halloween Picnic Train 蒸汽小火车</b>
-          <p>Central 站出发往返约 2 小时，有变装角色。坐 Metro 或火车进城，4 岁以下坐车免费。</p>
-          <p class="meta"><span class="num">$65 起</span> · 喜欢火车的娃会很开心 · <a class="go" href="https://www.picnictrain.com.au/halloween" target="_blank" rel="noopener">官网 / 预订 ↗</a></p>
-          <p class="where"><a href="https://www.google.com/maps/dir/?api=1&origin=Castle+Hill+NSW&destination=Sydney+Central+Station&travelmode=driving" target="_blank" rel="noopener">📍 地图路线</a></p>
-        </div></div>
-        <div class="slot"><div class="when">下雨<br>备案</div><div class="what">
-          <b>商场室内游乐 + 图书馆故事时间</b>
-          <p>Castle Towers、Rouse Hill Town Centre 都有母婴室和室内游乐区；Hills Shire 图书馆平时有低龄故事会，周末开放时间以官网为准。</p>
-        </div></div>
-      </article>
-    </div>
-
-    <div class="more">
-      <h3>其他可以替换的选择（多在市区和南区，车程更远）</h3>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>活动（点名字看官网）</th><th>时间</th><th>地点</th><th>价格</th><th>适合</th><th>地图</th></tr></thead>
-          <tbody>
-            <tr><td><a href="https://www.cocklebaywharf.com.au/events/skeletopia-halloween-festival/" target="_blank" rel="noopener">Skeletopia 万圣节节（巨型木偶、骷髅巡游、画脸）</a> ↗</td><td class="num">六 4–8:30pm</td><td>Darling Harbour, Cockle Bay Wharf</td><td>免费</td><td>全年龄，胆小的娃慎入</td><td style="white-space:nowrap"><a href="https://www.google.com/maps/dir/?api=1&origin=Castle+Hill+NSW&destination=Cockle+Bay+Wharf%2C+Darling+Harbour&travelmode=driving" target="_blank" rel="noopener">📍 路线</a></td></tr>
-            <tr><td><a href="https://www.canadabay.nsw.gov.au/lifestyle/our-area/our-events/halloween-festival" target="_blank" rel="noopener">Majors Bay Road 万圣节街区节</a> ↗</td><td class="num">六 2–7pm</td><td>Concord</td><td>免费</td><td>全年龄</td><td style="white-space:nowrap"><a href="https://www.google.com/maps/dir/?api=1&origin=Castle+Hill+NSW&destination=Majors+Bay+Road%2C+Concord+NSW&travelmode=driving" target="_blank" rel="noopener">📍 路线</a></td></tr>
-            <tr><td><a href="https://www.campbelltown.nsw.gov.au/About-Campbelltown/Events-in-Campbelltown/Fishers-Ghost" target="_blank" rel="noopener">Fisher's Ghost 节：周六巡游，周日家庭日 + 讨糖路线</a> ↗</td><td class="num">六 2–4pm 巡游；日 3–6pm 讨糖</td><td>Campbelltown, Queen St</td><td>免费，游乐设施另付</td><td>全年龄</td><td style="white-space:nowrap"><a href="https://www.google.com/maps/dir/?api=1&origin=Castle+Hill+NSW&destination=Mawson+Park%2C+Campbelltown+NSW&travelmode=driving" target="_blank" rel="noopener">📍 路线</a></td></tr>
-            <tr><td><a href="https://sites.google.com/tps-pandc.org.au/halloween/halloween-spooktacular-fun-fair" target="_blank" rel="noopener">Turramurra 万圣节游乐会</a> ↗</td><td class="num">六 11am–3pm</td><td>Turramurra Public School</td><td class="num">入场 $2</td><td>全年龄</td><td style="white-space:nowrap"><a href="https://www.google.com/maps/dir/?api=1&origin=Castle+Hill+NSW&destination=Turramurra+Public+School%2C+Turramurra+NSW&travelmode=driving" target="_blank" rel="noopener">📍 路线</a></td></tr>
-            <tr><td><a href="https://www.fairfieldcity.nsw.gov.au/Whats-on/Halloween-at-the-Museum" target="_blank" rel="noopener">Halloween at the Museum（讨糖、手工）</a> ↗</td><td class="num">六 5–8pm</td><td>Fairfield City Museum, Smithfield</td><td>免费，需登记</td><td>小朋友</td><td style="white-space:nowrap"><a href="https://www.google.com/maps/dir/?api=1&origin=Castle+Hill+NSW&destination=Fairfield+City+Museum+%26+Gallery%2C+Smithfield+NSW&travelmode=driving" target="_blank" rel="noopener">📍 路线</a></td></tr>
-            <tr><td><a href="https://www.picnictrain.com.au/halloween" target="_blank" rel="noopener">Halloween Picnic Train 蒸汽小火车</a> ↗</td><td>六、日，往返约 2 小时</td><td>Central 站出发</td><td class="num">$65 起</td><td>全年龄，火车迷必去</td><td style="white-space:nowrap"><a href="https://www.google.com/maps/dir/?api=1&origin=Castle+Hill+NSW&destination=Sydney+Central+Station&travelmode=driving" target="_blank" rel="noopener">📍 路线</a></td></tr>
-            <tr><td><a href="https://ghostfestival.com.au" target="_blank" rel="noopener">Ghost in The Rocks 街头节</a> ↗</td><td class="num">周四–日 4–11pm</td><td>The Rocks</td><td>部分免费</td><td>白天傍晚去，晚场偏成人</td><td style="white-space:nowrap"><a href="https://www.google.com/maps/dir/?api=1&origin=Castle+Hill+NSW&destination=The+Rocks%2C+Sydney+NSW&travelmode=driving" target="_blank" rel="noopener">📍 路线</a></td></tr>
-            <tr><td><a href="https://mhnsw.au/" target="_blank" rel="noopener">Sydney Open 建筑开放日</a> ↗</td><td class="num">日 11/1</td><td>市区 40 多栋建筑</td><td class="num">成人 $55，12 岁以下免费</td><td>大童</td><td style="white-space:nowrap"><a href="https://www.google.com/maps/dir/?api=1&origin=Castle+Hill+NSW&destination=Sydney+NSW&travelmode=driving" target="_blank" rel="noopener">📍 路线</a></td></tr>
-            <tr><td><a href="https://harrypotterexhibition.com/locations/sydney/" target="_blank" rel="noopener">Harry Potter: The Exhibition</a> ↗</td><td>至 2027/1/31</td><td>Sydney Olympic Park</td><td class="num">$25 起</td><td>大童，下雨天备选</td><td style="white-space:nowrap"><a href="https://www.google.com/maps/dir/?api=1&origin=Castle+Hill+NSW&destination=Paddington+Pavilion%2C+Sydney+Olympic+Park+NSW&travelmode=driving" target="_blank" rel="noopener">📍 路线</a></td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="note"><b>这周的小提醒：</b>万圣节晚上路边车多，给娃的服装加一条反光带或发光手环；讨到的糖回家先检查成分和包装，小于 4 岁不要给硬糖和整颗坚果。蓝花楹也正开着，Kirribilli 的 McDougall Street 拍照很好看。出发前看一眼 <a href="http://www.bom.gov.au/nsw/forecasts/sydney.shtml" target="_blank" rel="noopener">BOM 天气</a>，农场遇雨可能临时关闭。</div>
-      <p class="sources">来源：<a href="https://newywithkids.com.au/halloween-events-sydney/" target="_blank" rel="noopener">Newy with Kids 万圣节清单</a> · <a href="https://newywithkids.com.au/where-to-go-fruit-picking-with-family" target="_blank" rel="noopener">悉尼周边摘水果指南</a> · <a href="https://www.sydneytravelguide.com.au/things-to-do-in-sydney-this-weekend/" target="_blank" rel="noopener">Sydney Travel Guide</a> · <a href="https://www.northshoremums.com.au/things-to-do-sydney-weekend/" target="_blank" rel="noopener">North Shore Mums</a>。价格和时间以官网为准，出发前再确认一次。</p>
-    </div>
+    <div id="weekend-content" aria-busy="true"></div>
+    <noscript><p>请启用 JavaScript 查看活动，或<a href="weekend.json">打开本周活动数据</a>。</p></noscript>
   </div>
 </section>
 
@@ -230,94 +186,107 @@ footer{padding-block:28px;color:var(--muted);font-size:.82rem}
     <div class="sec-head">
       <p class="eyebrow"><span class="mark" style="background:var(--gum)"></span>板块二 · 小西贝厨房</p>
       <h2>挑食不是对抗，是慢慢混熟</h2>
-      <p>儿科营养师普遍用的思路：大人决定吃什么、什么时候吃，孩子决定吃不吃、吃多少。一种新食物通常要接触 8 到 15 次才会被接受，所以“不吃”只是还没到次数。</p>
+      <p>大人安排吃什么、什么时候吃，孩子决定吃不吃、吃多少。先从熟悉的食物旁边加一小口新食物开始。</p>
     </div>
 
-    <div class="rules">
+    <details class="fold"><summary>吃饭小技巧 · 6 条</summary><div class="rules">
       <div class="rule"><b>每盘放一样“安全食物”</b><p>新菜旁边放一样他肯定吃的，比如米饭或水果。有退路，才敢碰新的。</p></div>
       <div class="rule"><b>新食物只放一小口</b><p>一颗豌豆、一片胡萝卜就够。份量小，压力也小，吃不吃都不评价。</p></div>
       <div class="rule"><b>从爱吃的往外“搭桥”</b><p>爱吃薯条就试红薯条，再试烤南瓜条。颜色、口感、形状每次只改一样。</p></div>
       <div class="rule"><b>让他动手</b><p>洗菜、撕生菜、按模具、撒芝士。自己做的东西，尝一口的概率高很多。</p></div>
       <div class="rule"><b>不哄、不逼、不交换</b><p>“吃完青菜才能吃甜点”会让青菜更讨厌。甜点偶尔和正餐一起上，不当奖励。</p></div>
       <div class="rule"><b>固定时间，饿了才香</b><p>正餐加点心大约每 2.5–3 小时一次，中间只给水。饭前一小时别喝奶和果汁。</p></div>
-    </div>
+    </div></details>
 
-    <div class="grid3">
+    <div class="grid3 recipes">
       <article class="card recipe">
         <h3>隐藏蔬菜番茄肉酱</h3>
+        <p class="meta">约 35 分钟 · 含备料，供参考</p>
         <p class="hook">一锅藏进 5 种菜</p>
-        <dl><dt>材料</dt><dd>牛肉末 300g、胡萝卜、西葫芦、红椒、洋葱、蘑菇各少许、番茄罐头 1 罐</dd>
+        <details class="recipe-steps"><summary>材料与做法</summary><dl><dt>材料</dt><dd>牛肉末 300g、胡萝卜、西葫芦、红椒、洋葱、蘑菇各少许、番茄罐头 1 罐</dd>
         <dt>做法</dt><dd>蔬菜切碎炒软，加番茄打成泥，再和炒散的肉末一起炖 20 分钟。拌意面、拌饭、做千层面都行。</dd></dl>
         <p class="trick">小技巧：一次做一大锅，分小盒冷冻，忙的晚上 5 分钟开饭。</p>
-      </article>
+      </details></article>
       <article class="card recipe">
         <h3>绿巨人香蕉松饼</h3>
+        <p class="meta">约 15 分钟 · 含备料，供参考</p>
         <p class="hook">菠菜变成“超能力”颜色</p>
-        <dl><dt>材料</dt><dd>熟香蕉 1 根、鸡蛋 2 个、燕麦或面粉 80g、一小把嫩菠菜、少许牛奶</dd>
+        <details class="recipe-steps"><summary>材料与做法</summary><dl><dt>材料</dt><dd>熟香蕉 1 根、鸡蛋 2 个、燕麦或面粉 80g、一小把嫩菠菜、少许牛奶</dd>
         <dt>做法</dt><dd>全部放进搅拌机打匀，平底锅小火煎成硬币大小的小饼，两面各 1 分钟。</dd></dl>
         <p class="trick">小技巧：叫它“绿巨人饼”，让他自己按搅拌机按钮，看菠菜“变身”。</p>
-      </article>
+      </details></article>
       <article class="card recipe">
         <h3>松饼杯小蛋饼</h3>
+        <p class="meta">约 25 分钟 · 含备料，供参考</p>
         <p class="hook">拿在手上吃，出门也能带</p>
-        <dl><dt>材料</dt><dd>鸡蛋 6 个、牛奶 50ml、芝士碎、切碎的火腿 / 玉米 / 西兰花</dd>
+        <details class="recipe-steps"><summary>材料与做法</summary><dl><dt>材料</dt><dd>鸡蛋 6 个、牛奶 50ml、芝士碎、切碎的火腿 / 玉米 / 西兰花</dd>
         <dt>做法</dt><dd>蛋液加牛奶打散，松饼模具里先放配料再倒蛋液，撒芝士，180°C 烤 15–18 分钟。</dd></dl>
         <p class="trick">小技巧：让他自己选每个杯子里放什么，“这个是你的专属蛋饼”。</p>
-      </article>
+      </details></article>
+    </div>
+    <details class="fold"><summary>更多菜谱 · 5 道</summary><div class="grid3">
       <article class="card recipe">
         <h3>鸡肉西葫芦小丸子</h3>
+        <p class="meta">约 30 分钟 · 含备料，供参考</p>
         <p class="hook">软嫩，像吃零食</p>
-        <dl><dt>材料</dt><dd>鸡肉末 400g、擦丝挤干水的西葫芦 1 根、面包糠 3 勺、鸡蛋 1 个、少许芝士</dd>
+        <details class="recipe-steps"><summary>材料与做法</summary><dl><dt>材料</dt><dd>鸡肉末 400g、擦丝挤干水的西葫芦 1 根、面包糠 3 勺、鸡蛋 1 个、少许芝士</dd>
         <dt>做法</dt><dd>拌匀搓成乒乓球大小，200°C 烤 18 分钟，中间翻一次。蘸番茄酱或酸奶酱。</dd></dl>
-        <p class="trick">小技巧：给一根小叉子或牙签（大人看着），“戳着吃”本身就好玩。</p>
-      </article>
+        <p class="trick">小技巧：使用适龄餐具，在大人看护下坐稳吃饭。</p>
+      </details></article>
       <article class="card recipe">
         <h3>烤红薯条和南瓜条</h3>
+        <p class="meta">约 35 分钟 · 含备料，供参考</p>
         <p class="hook">从薯条“搭桥”过来</p>
-        <dl><dt>材料</dt><dd>红薯、南瓜切成薯条形状，橄榄油，一点点盐</dd>
+        <details class="recipe-steps"><summary>材料与做法</summary><dl><dt>材料</dt><dd>红薯、南瓜切成薯条形状，橄榄油，一点点盐</dd>
         <dt>做法</dt><dd>拌油平铺不重叠，210°C 烤 25 分钟，中途翻面。外脆里软。</dd></dl>
         <p class="trick">小技巧：第一次和普通薯条一起放，混在一起他自己会去试。</p>
-      </article>
+      </details></article>
       <article class="card recipe">
         <h3>动物造型饭团</h3>
+        <p class="meta">约 15 分钟（米饭已煮好） · 含备料，供参考</p>
         <p class="hook">米饭爱好者的入门款</p>
-        <dl><dt>材料</dt><dd>米饭、海苔、肉松或三文鱼碎、少许蔬菜碎拌进饭里</dd>
+        <details class="recipe-steps"><summary>材料与做法</summary><dl><dt>材料</dt><dd>米饭、海苔、肉松或三文鱼碎、少许蔬菜碎拌进饭里</dd>
         <dt>做法</dt><dd>保鲜膜包着捏成小熊、小猫，用海苔剪眼睛嘴巴。用饼干模具压更快。</dd></dl>
         <p class="trick">小技巧：蔬菜碎要切得比米粒还小，颜色接近的先试，比如玉米、胡萝卜。</p>
-      </article>
+      </details></article>
       <article class="card recipe">
         <h3>自己做的迷你披萨</h3>
+        <p class="meta">约 15 分钟 · 含备料，供参考</p>
         <p class="hook">动手就会想吃</p>
-        <dl><dt>材料</dt><dd>卷饼皮或英式松饼、番茄酱、芝士碎、几样切好的配料</dd>
+        <details class="recipe-steps"><summary>材料与做法</summary><dl><dt>材料</dt><dd>卷饼皮或英式松饼、番茄酱、芝士碎、几样切好的配料</dd>
         <dt>做法</dt><dd>大人摆好碗，孩子自己涂酱、撒料，200°C 烤 8–10 分钟。</dd></dl>
         <p class="trick">小技巧：配料里放一样新食物，不要求放，只要“摆在那里”。</p>
-      </article>
+      </details></article>
       <article class="card recipe">
         <h3>酸奶水果冰棒</h3>
+        <p class="meta">约 10 分钟 + 冷冻 4 小时 · 含备料，供参考</p>
         <p class="hook">悉尼夏天的点心</p>
-        <dl><dt>材料</dt><dd>原味全脂酸奶、香蕉或芒果、一把蓝莓（周末摘的正好）</dd>
+        <details class="recipe-steps"><summary>材料与做法</summary><dl><dt>材料</dt><dd>原味全脂酸奶、香蕉或芒果、一把蓝莓（周末摘的正好）</dd>
         <dt>做法</dt><dd>水果和酸奶打匀，倒进冰棒模具，冷冻 4 小时以上。</dd></dl>
         <p class="trick">小技巧：可以偷偷加一点牛油果或熟南瓜泥，口感更绵，颜色基本看不出来。</p>
-      </article>
+      </details></article>
     </div>
 
+    </details>
     <div class="tracker card" id="tracker">
       <p class="eyebrow">食物记录本</p>
       <h3>小西贝吃过什么、反应怎么样</h3>
       <p class="meta">每试一次点一下“又试了一次”。记录只保存在这台设备的浏览器里，换手机或清缓存会丢失。</p>
       <form id="food-form" autocomplete="off">
         <label class="sr" for="food-name" hidden>食物</label>
-        <input id="food-name" placeholder="食物，比如：西兰花" maxlength="40" required>
+        <input aria-label="食物名称" id="food-name" placeholder="食物，比如：西兰花" maxlength="40" required>
         <select id="food-status" aria-label="反应">
           <option value="trying">在尝试</option>
           <option value="love">爱吃</option>
           <option value="ok">还行</option>
           <option value="no">拒绝</option>
         </select>
-        <input id="food-note" placeholder="备注：做法 / 口感，比如“蒸软了肯吃两口”" maxlength="120">
+        <input aria-label="食物备注" id="food-note" placeholder="备注：做法 / 口感，比如“蒸软了肯吃两口”" maxlength="120">
         <button class="primary" type="submit" id="food-add" disabled>记一笔</button>
       </form>
-      <p id="tracker-status">正在打开记录本…</p>
+      <div class="backup-actions"><button type="button" id="food-export" disabled>导出备份</button><button type="button" id="food-import">导入备份</button><input type="file" id="food-file" accept="application/json,.json" hidden></div>
+      <p class="meta">备份文件含你的食物记录，请自行保存；导入会合并记录，不清空现有内容。此记录本暂不自动推荐菜谱。</p>
+      <p id="tracker-status" role="status">正在打开记录本…</p>
       <div class="cols" id="food-cols"></div>
     </div>
   </div>
@@ -332,30 +301,27 @@ footer{padding-block:28px;color:var(--muted);font-size:.82rem}
     </div>
 
     <div class="ages">
-      <div class="age"><div class="band-label">0–1 岁<small>以宝宝作息为中心</small></div>
-        <ul><li>出门时间卡在两觉之间，单程最好不超过 45 分钟车程。</li>
+      <details class="age"><summary class="band-label">0–1 岁<small>以宝宝作息为中心</small></summary><ul><li>出门时间卡在两觉之间，单程最好不超过 45 分钟车程。</li>
         <li>6 个月内不涂防晒，靠遮阳篷、帽子和阴凉；推车别用毯子全盖住，里面会很热。</li>
         <li>商场母婴室（Parents' Room）基本都有，Westfield 的最好用。</li>
-        <li>NSW 法规：至少 6 个月内必须后向安全座椅。</li></ul></div>
-      <div class="age" style="background:var(--jac-soft);border-radius:12px;padding-inline:14px"><div class="band-label">1–3 岁<small>腿快、耐心短</small><small><b>小西贝现在在这一段</b>，2027 年 1 月满 3 岁后看下一段</small></div>
-        <ul><li>一个上午只安排一个主活动，玩 1.5–2 小时就撤，别贪多。</li>
+        <li>NSW 法规：至少 6 个月内必须后向安全座椅。</li></ul></details>
+      <details class="age"><summary class="band-label">1–3 岁<small>腿快、耐心短</small><small class="current-age-note" hidden>小西贝当前年龄段</small></summary><ul><li>一个上午只安排一个主活动，玩 1.5–2 小时就撤，别贪多。</li>
         <li>带“分心包”：贴纸、小车、一盒葡萄干，排队和等餐时救命。</li>
         <li>水边、停车场一律牵手，提前约好“停”这个口令，在家先练。</li>
         <li>葡萄、小番茄要切成四瓣，整颗坚果 5 岁前都不要给。</li>
-        <li>情绪崩溃多半是饿了或困了，包里永远留一份点心。</li></ul></div>
-      <div class="age"><div class="band-label">3–5 岁<small>开始能讲道理</small></div>
-        <ul><li>出门前跟他讲清楚流程：“先摘草莓，再吃午饭，然后回家”，预期稳定就少闹。</li>
+        <li>情绪崩溃多半是饿了或困了，包里永远留一份点心。</li></ul></details>
+      <details class="age"><summary class="band-label">3–5 岁<small>开始能讲道理</small></summary><ul><li>出门前跟他讲清楚流程：“先摘草莓，再吃午饭，然后回家”，预期稳定就少闹。</li>
         <li>让他背自己的小背包，装水杯和一样玩具，有参与感。</li>
         <li>教他认“穿制服的人”和收银员可以求助；衣服里放一张写着你手机号的卡片。</li>
-        <li>NSW 4 岁起用带安全带的增高座椅，一直到 7 岁左右。</li></ul></div>
-      <div class="age"><div class="band-label">5 岁以上<small>可以玩大的</small></div>
-        <ul><li>能走 3–5 公里的步道了，Spit to Manly 分段走、Royal National Park 都可以开始。</li>
+        <li>NSW：4 至未满 7 岁可使用带内置安全带的前向儿童座椅，或合适的获批增高座椅；按孩子体型和座椅标记选择。</li></ul></details>
+      <details class="age"><summary class="band-label">5 岁以上<small>可以玩大的</small></summary><ul><li>能走 3–5 公里的步道了，Spit to Manly 分段走、Royal National Park 都可以开始。</li>
         <li>让他参与选周末去哪，从这页里挑两个给他选一个。</li>
         <li>学游泳和海滩安全：只在红黄旗之间下水，教他看离岸流。</li>
-        <li>夜间活动（手电筒探险、看星星）这个年龄最有意思。</li></ul></div>
+        <li>夜间活动（手电筒探险、看星星）这个年龄最有意思。</li></ul></details>
     </div>
 
-    <div class="syd">
+    <p class="sources">安全参考：<a href="https://www.rch.org.au/kidsinfo/fact_sheets/Choking_suffocation_and_strangulation_prevention/" target="_blank" rel="noopener">RCH 防噎食建议</a> · <a href="https://www.nsw.gov.au/driving-boating-and-transport/driving-nsw/roads-safety-and-rules/safe-driving/child-seats" target="_blank" rel="noopener">NSW 儿童座椅规则</a>。5 岁前不提供整颗坚果；幼儿避免硬糖等易噎食物。</p>
+    <details class="syd fold"><summary>悉尼出门注意事项</summary>
       <h3>悉尼特有的注意事项</h3>
       <div class="grid3" style="margin-top:12px">
         <div class="card"><h3>紫外线</h3><p>10 月到 3 月 UV 经常到“极高”。Slip, Slop, Slap, Seek, Slide：长袖、防晒霜、宽檐帽、找阴凉、戴墨镜。10am–3pm 尽量在室内或树荫下。</p></div>
@@ -365,14 +331,13 @@ footer{padding-block:28px;color:var(--muted);font-size:.82rem}
         <div class="card"><h3>海滩</h3><p>只去有救生员的海滩，在红黄旗之间。小孩在水里永远在大人一臂之内。</p></div>
         <div class="card"><h3>交通</h3><p>4 岁以下坐公交、火车、渡轮免费。Opal 卡周日封顶很低，周日坐渡轮去 Manly 是便宜的半日游。</p></div>
       </div>
-    </div>
-
+    </details>
     <div class="pack">
-      <h3>出门必带清单</h3>
+      <h3>出门必带清单 <span id="pack-count" class="meta"></span></h3><button type="button" id="pack-reset">重新打包</button><p class="meta" id="pack-status" role="status">勾选状态仅保存在此浏览器。</p>
       <ul>
-        <li>水杯（每人一个）</li><li>两份点心</li><li>湿巾和纸巾</li><li>备用一套衣服</li>
-        <li>防晒霜、帽子</li><li>尿布或小内裤</li><li>创可贴</li><li>小垃圾袋</li>
-        <li>充好电的手机</li><li>Opal 卡</li><li>摘果子用的袋子或盒子</li><li>一个小玩具</li>
+        <li><label><input type="checkbox" data-pack> <span>水杯（每人一个）</span></label></li><li><label><input type="checkbox" data-pack> <span>两份点心</span></label></li><li><label><input type="checkbox" data-pack> <span>湿巾和纸巾</span></label></li><li><label><input type="checkbox" data-pack> <span>备用一套衣服</span></label></li>
+        <li><label><input type="checkbox" data-pack> <span>防晒霜、帽子</span></label></li><li><label><input type="checkbox" data-pack> <span>尿布或小内裤</span></label></li><li><label><input type="checkbox" data-pack> <span>创可贴</span></label></li><li><label><input type="checkbox" data-pack> <span>小垃圾袋</span></label></li>
+        <li><label><input type="checkbox" data-pack> <span>充好电的手机</span></label></li><li><label><input type="checkbox" data-pack> <span>Opal 卡</span></label></li><li><label><input type="checkbox" data-pack> <span>摘果子用的袋子或盒子</span></label></li><li><label><input type="checkbox" data-pack> <span>一个小玩具</span></label></li>
       </ul>
     </div>
   </div>
@@ -380,53 +345,10 @@ footer{padding-block:28px;color:var(--muted);font-size:.82rem}
 </main>
 
 <footer class="wrap">
-  <p>周末活动每周更新一次。在食物记录本里记下小西贝爱吃和不吃的东西，菜谱会越来越对他的口味。</p>
+  <p>周末活动每周更新一次，时间与价格以主办方为准。食物记录仅保存在当前浏览器，记得定期导出备份。</p>
 </footer>
 
-<script>
-(function(){
-  const LABELS={love:"爱吃",ok:"还行",trying:"在尝试",no:"拒绝"};
-  const ORDER=["trying","love","ok","no"];
-  const COLORS={love:"var(--gum)",ok:"var(--sun)",trying:"var(--jac)",no:"var(--warn)"};
-  const KEY="xibei-foods";
-  const $=id=>document.getElementById(id);
-  const status=$("tracker-status"), cols=$("food-cols"), form=$("food-form"), addBtn=$("food-add");
-  let foods=[], ok=true;
-  try{foods=JSON.parse(localStorage.getItem(KEY)||"[]");}catch(e){ok=false;}
-  function save(){try{localStorage.setItem(KEY,JSON.stringify(foods));status.textContent="";}catch(e){status.textContent="这个浏览器不允许保存（可能是无痕模式）。";}}
-  function el(tag,attrs,text){const e=document.createElement(tag);if(attrs)for(const k in attrs)e.setAttribute(k,attrs[k]);if(text!=null)e.textContent=text;return e;}
-  function upd(id,patch){const f=foods.find(x=>x.id===id);if(!f)return;Object.assign(f,patch,{updated:new Date().toISOString()});save();render();}
-  function render(){
-    cols.replaceChildren();
-    if(!foods.length){cols.append(el("div",{class:"empty"},"还没有记录。在上面写下第一样食物，比如小西贝最近拒绝的那道菜，选“拒绝”，记一笔。"));return;}
-    for(const s of ORDER){
-      const list=foods.filter(f=>f.status===s).sort((a,b)=>(b.updated||"").localeCompare(a.updated||""));
-      const col=el("div",{class:"col"});const h=el("h4");
-      h.append(el("span",{class:"mark",style:"background:"+COLORS[s]}),document.createTextNode(LABELS[s]+" · "+list.length));col.append(h);
-      const ul=el("ul");if(!list.length)ul.append(el("li",{class:"meta"},"暂无"));
-      for(const f of list){
-        const li=el("li",{class:"food"});const top=el("div",{class:"top"});
-        top.append(el("span",{class:"name"},f.name),el("span",{class:"n"},"试过 "+(f.tries||0)+" 次"));li.append(top);
-        if(f.note)li.append(el("div",{class:"fn"},f.note));
-        const acts=el("div",{class:"acts"});
-        const plus=el("button",{type:"button"},"又试了一次");plus.onclick=()=>upd(f.id,{tries:(f.tries||0)+1});acts.append(plus);
-        for(const t of ORDER){if(t===f.status)continue;const b=el("button",{type:"button"},"→ "+LABELS[t]);b.onclick=()=>upd(f.id,{status:t});acts.append(b);}
-        const del=el("button",{type:"button","aria-label":"删除 "+f.name},"删除");del.onclick=()=>{foods=foods.filter(x=>x.id!==f.id);save();render();};acts.append(del);
-        li.append(acts);ul.append(li);
-      }
-      col.append(ul);cols.append(col);
-    }
-  }
-  form.addEventListener("submit",e=>{
-    e.preventDefault();const name=$("food-name").value.trim();if(!name)return;
-    const note=$("food-note").value.trim(), st=$("food-status").value;
-    const ex=foods.find(f=>f.name===name);
-    if(ex){Object.assign(ex,{status:st,tries:(ex.tries||0)+1,note:note||ex.note||"",updated:new Date().toISOString()});}
-    else foods.push({id:Date.now().toString(36),name,status:st,tries:1,note,updated:new Date().toISOString()});
-    $("food-name").value="";$("food-note").value="";save();render();
-  });
-  addBtn.disabled=false;status.textContent=ok?"":"这个浏览器不允许保存（可能是无痕模式）。";render();
-})();
-</script>
+<script src="weekend.js" defer></script>
+<script src="app.js" defer></script>
 </body>
 </html>

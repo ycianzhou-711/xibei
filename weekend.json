@@ -1,0 +1,212 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-10-27",
+  "startDate": "2026-10-31",
+  "endDate": "2026-11-01",
+  "title": "2026年10月31日（六）– 11月1日（日）",
+  "intro": "每天一个主活动，中午回家午睡。车程均按 Castle Hill 出发估算。",
+  "recommendedIds": [
+    "canoelands",
+    "bush-monsters"
+  ],
+  "activities": [
+    {
+      "id": "canoelands",
+      "title": "Canoelands Orchard 摘草莓、蓝莓",
+      "time": "2026-10-31 上午 · 建议 9 点场",
+      "drive": "约 40 分钟",
+      "price": "成人 $8 起 · 3 岁以下免费",
+      "booking": "需预约，余位未查",
+      "description": "从 Castle Hill 经 Galston 过去大约 40 分钟。果园主季 10 月中开始，周末必须预约，建议订 9 点左右的早场，太阳还不毒。",
+      "officialUrl": "http://www.canoelandsorchard.com/",
+      "mapUrl": "https://www.google.com/maps/dir/?api=1&origin=Castle+Hill+NSW&destination=Canoelands+Orchard%2C+27+Canoelands+Rd%2C+Canoelands+NSW&travelmode=driving",
+      "reviewUrl": null,
+      "rating": null,
+      "verifiedAt": null,
+      "budget": {
+        "label": "两位成人 + 一名未满 3 岁儿童，门票 $16 起",
+        "note": "按现有成人起价估算，不含采摘、餐饮及交通；票价待官网复核。"
+      }
+    },
+    {
+      "id": "hudson",
+      "title": "Hudson Hotel 万圣节儿童迪斯科",
+      "time": "2026-10-31 18:00–21:00",
+      "drive": "约 15 分钟",
+      "price": "免费",
+      "booking": "建议 RSVP，名额未查",
+      "description": "6–9pm，Seven Hills，离家大约 15 分钟。有变装比赛，6 点到、7 点撤，不耽误睡觉。给他穿个南瓜或小动物的衣服就行。",
+      "officialUrl": "https://www.hudsonhotel.com.au/events/",
+      "mapUrl": "https://www.google.com/maps/dir/?api=1&origin=Castle+Hill+NSW&destination=Hudson+Hotel%2C+Seven+Hills+NSW&travelmode=driving",
+      "reviewUrl": null,
+      "rating": null,
+      "verifiedAt": null,
+      "budget": null
+    },
+    {
+      "id": "bush-monsters",
+      "title": "Bungarribee Park「Bush Monsters: Friend or Foe?」",
+      "time": "2026-11-01 09:00–12:00",
+      "drive": "约 20 分钟",
+      "price": "每名儿童 $15 起",
+      "booking": "预约要求及余位待核实",
+      "description": "9am–12pm，专门给小一点孩子的怪兽寻宝路线，有 Sydney Zoo 带来的小动物。从西北区过去大约 20 分钟，旁边就是 Sydney Zoo。",
+      "officialUrl": "https://www.greatersydneyparklands.nsw.gov.au/whats-on/bush-monsters-friend-or-foe",
+      "mapUrl": "https://www.google.com/maps/dir/?api=1&origin=Castle+Hill+NSW&destination=Bungarribee+Park%2C+Doonside+NSW&travelmode=driving",
+      "reviewUrl": "https://www.google.com/maps/search/?api=1&query=Bungarribee+Park%2C+Doonside+NSW",
+      "rating": "★ 4.5 （3,081 条）",
+      "verifiedAt": null,
+      "budget": null
+    },
+    {
+      "id": "bilpin",
+      "title": "Bilpin Fruit Bowl 温室摘草莓",
+      "time": "2026-10-31 · 场次以预约为准",
+      "drive": "约 1 小时",
+      "price": "成人 $20 · 3 岁以下免费 · 草莓 $20/kg",
+      "booking": "需预约，余位未查",
+      "description": "经 Bells Line of Road 大约 1 小时，温室里摘，太阳大也不怕。每两小时限 200 人，一定要先订。车上正好睡一觉。",
+      "officialUrl": "https://bilpinfruitbowl.com.au/pick-your-own/",
+      "mapUrl": "https://www.google.com/maps/dir/?api=1&origin=Castle+Hill+NSW&destination=Bilpin+Fruit+Bowl%2C+2093+Bells+Line+of+Rd%2C+Bilpin+NSW&travelmode=driving",
+      "reviewUrl": "https://www.google.com/maps/search/?api=1&query=Bilpin+Fruit+Bowl%2C+2093+Bells+Line+of+Rd%2C+Bilpin+NSW",
+      "rating": "★ 3.6",
+      "verifiedAt": null,
+      "budget": {
+        "label": "两位成人 + 一名未满 3 岁儿童，门票 $40",
+        "note": "按现有标价估算，采摘另计；票价待官网复核。"
+      }
+    },
+    {
+      "id": "picnic-train",
+      "title": "Halloween Picnic Train 蒸汽小火车",
+      "time": "2026-10-31 / 11-01 · 往返约 2 小时",
+      "drive": "需先到 Central 站",
+      "price": "$65 起",
+      "booking": "需查票价和余位",
+      "description": "Central 站出发，往返约 2 小时，有变装角色。活动儿童票和入场条件需向主办方确认。",
+      "officialUrl": "https://www.picnictrain.com.au/halloween",
+      "mapUrl": "https://www.google.com/maps/dir/?api=1&origin=Castle+Hill+NSW&destination=Sydney+Central+Station&travelmode=driving",
+      "reviewUrl": null,
+      "rating": null,
+      "verifiedAt": null,
+      "budget": null
+    },
+    {
+      "id": "rain-plan",
+      "title": "商场室内游乐 + 图书馆故事时间",
+      "time": "2026-10-31 / 11-01 · 先查开放时间",
+      "drive": "按所选地点估算",
+      "price": "费用以所选场地为准",
+      "booking": "先核实周末安排",
+      "description": "Castle Towers、Rouse Hill Town Centre 都有母婴室和室内游乐区；Hills Shire 图书馆平时有低龄故事会，周末开放时间以官网为准。",
+      "officialUrl": null,
+      "mapUrl": null,
+      "reviewUrl": null,
+      "rating": null,
+      "verifiedAt": null,
+      "budget": null
+    }
+  ],
+  "alternatives": [
+    {
+      "title": "Skeletopia 万圣节节（巨型木偶、骷髅巡游、画脸）",
+      "officialUrl": "https://www.cocklebaywharf.com.au/events/skeletopia-halloween-festival/",
+      "time": "2026-10-31 · 4–8:30pm（待核实）",
+      "location": "Darling Harbour, Cockle Bay Wharf",
+      "price": "免费",
+      "suitable": "全年龄，胆小的娃慎入",
+      "mapUrl": "https://www.google.com/maps/dir/?api=1&origin=Castle+Hill+NSW&destination=Cockle+Bay+Wharf%2C+Darling+Harbour&travelmode=driving",
+      "verifiedAt": null
+    },
+    {
+      "title": "Majors Bay Road 万圣节街区节",
+      "officialUrl": "https://www.canadabay.nsw.gov.au/lifestyle/our-area/our-events/halloween-festival",
+      "time": "2026-10-31 · 2–7pm（待核实）",
+      "location": "Concord",
+      "price": "免费",
+      "suitable": "全年龄",
+      "mapUrl": "https://www.google.com/maps/dir/?api=1&origin=Castle+Hill+NSW&destination=Majors+Bay+Road%2C+Concord+NSW&travelmode=driving",
+      "verifiedAt": null
+    },
+    {
+      "title": "Fisher's Ghost 节：周六巡游，周日家庭日 + 讨糖路线",
+      "officialUrl": "https://www.campbelltown.nsw.gov.au/About-Campbelltown/Events-in-Campbelltown/Fishers-Ghost",
+      "time": "2026-10-31 14:00–16:00；11-01 15:00–18:00（待核实）",
+      "location": "Campbelltown, Queen St",
+      "price": "免费，游乐设施另付",
+      "suitable": "全年龄",
+      "mapUrl": "https://www.google.com/maps/dir/?api=1&origin=Castle+Hill+NSW&destination=Mawson+Park%2C+Campbelltown+NSW&travelmode=driving",
+      "verifiedAt": null
+    },
+    {
+      "title": "Turramurra 万圣节游乐会",
+      "officialUrl": "https://sites.google.com/tps-pandc.org.au/halloween/halloween-spooktacular-fun-fair",
+      "time": "2026-10-31 · 11am–3pm（待核实）",
+      "location": "Turramurra Public School",
+      "price": "入场 $2",
+      "suitable": "全年龄",
+      "mapUrl": "https://www.google.com/maps/dir/?api=1&origin=Castle+Hill+NSW&destination=Turramurra+Public+School%2C+Turramurra+NSW&travelmode=driving",
+      "verifiedAt": null
+    },
+    {
+      "title": "Halloween at the Museum（讨糖、手工）",
+      "officialUrl": "https://www.fairfieldcity.nsw.gov.au/Whats-on/Halloween-at-the-Museum",
+      "time": "2026-10-31 · 5–8pm（待核实）",
+      "location": "Fairfield City Museum, Smithfield",
+      "price": "免费，需登记",
+      "suitable": "小朋友",
+      "mapUrl": "https://www.google.com/maps/dir/?api=1&origin=Castle+Hill+NSW&destination=Fairfield+City+Museum+%26+Gallery%2C+Smithfield+NSW&travelmode=driving",
+      "verifiedAt": null
+    },
+    {
+      "title": "Ghost in The Rocks 街头节",
+      "officialUrl": "https://ghostfestival.com.au",
+      "time": "2026-10-29 至 11-01 · 16:00–23:00（待核实）",
+      "location": "The Rocks",
+      "price": "部分免费",
+      "suitable": "白天傍晚去，晚场偏成人",
+      "mapUrl": "https://www.google.com/maps/dir/?api=1&origin=Castle+Hill+NSW&destination=The+Rocks%2C+Sydney+NSW&travelmode=driving",
+      "verifiedAt": null
+    },
+    {
+      "title": "Sydney Open 建筑开放日",
+      "officialUrl": "https://mhnsw.au/",
+      "time": "2026-11-01（待核实）",
+      "location": "市区 40 多栋建筑",
+      "price": "成人 $55，12 岁以下免费",
+      "suitable": "大童",
+      "mapUrl": "https://www.google.com/maps/dir/?api=1&origin=Castle+Hill+NSW&destination=Sydney+NSW&travelmode=driving",
+      "verifiedAt": null
+    },
+    {
+      "title": "Harry Potter: The Exhibition",
+      "officialUrl": "https://harrypotterexhibition.com/locations/sydney/",
+      "time": "截至 2027-01-31（原有日期，待核实）",
+      "location": "Sydney Olympic Park",
+      "price": "$25 起",
+      "suitable": "大童，下雨天备选",
+      "mapUrl": "https://www.google.com/maps/dir/?api=1&origin=Castle+Hill+NSW&destination=Paddington+Pavilion%2C+Sydney+Olympic+Park+NSW&travelmode=driving",
+      "verifiedAt": null
+    }
+  ],
+  "reminder": "万圣节傍晚留意车辆，服装可加反光带。农场可能因天气关闭，出发前查看官网和天气。",
+  "weatherUrl": "https://www.bom.gov.au/nsw/forecasts/sydney.shtml",
+  "sources": [
+    {
+      "label": "Newy with Kids 万圣节清单",
+      "url": "https://newywithkids.com.au/halloween-events-sydney/"
+    },
+    {
+      "label": "悉尼周边摘水果指南",
+      "url": "https://newywithkids.com.au/where-to-go-fruit-picking-with-family"
+    },
+    {
+      "label": "Sydney Travel Guide",
+      "url": "https://www.sydneytravelguide.com.au/things-to-do-in-sydney-this-weekend/"
+    },
+    {
+      "label": "North Shore Mums",
+      "url": "https://www.northshoremums.com.au/things-to-do-sydney-weekend/"
+    }
+  ]
+}
